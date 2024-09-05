@@ -37,29 +37,29 @@ MongoDB: Database to store user information, playlists, and track metadata.
 
 1. Clone the repository:
 
-git clone https://github.com/your-username/Music-Stream-App.git
+```git clone https://github.com/your-username/Music-Stream-App.git
 
-cd Music-Stream-App
+```cd Music-Stream-App
 
 2. Install dependencies:
 
-npm install
+```npm install
 
 3. Link native dependencies (if needed):
 
-npx react-native link
+```npx react-native link
 
 4. Start the development server:
 
-npx react-native run-android   # for Android
+```npx react-native run-android   # for Android
 
-npx react-native run-ios       # for iOS
+```npx react-native run-ios       # for iOS
 
 ## Configuration
 
 API Keys: This app requires API keys for the music streaming service. Create a .env file in the root directory and add your API keys:
 
-API_KEY=your_music_service_api_key
+```API_KEY=your_music_service_api_key
 
 Backend Setup: Set up the backend server by following the instructions in the backend repository.
 
