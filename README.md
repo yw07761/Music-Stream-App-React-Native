@@ -38,6 +38,7 @@ MongoDB: Database to store user information, playlists, and track metadata.
 1. Clone the repository:
 
 git clone https://github.com/your-username/Music-Stream-App.git
+
 cd Music-Stream-App
 
 2. Install dependencies:
@@ -51,6 +52,7 @@ npx react-native link
 4. Start the development server:
 
 npx react-native run-android   # for Android
+
 npx react-native run-ios       # for iOS
 
 ## Configuration
