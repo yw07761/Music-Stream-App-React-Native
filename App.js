@@ -4,6 +4,9 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import MusicProfile from './components/MusicProfile';
 import MusicHome from './components/MusicHome';
+import LaunchScreen from './components/LaunchScreen';
+import LaunchPremium from './components/LaunchPremium';
+import SubscriptionPlans from './components/SubscriptionPlans';
 import { Card } from 'react-native-paper'; // Nhập Card từ react-native-paper
 
 const Stack = createStackNavigator();
@@ -13,9 +16,12 @@ export default function App() {
     <SafeAreaView style={styles.safeArea}>
       <NavigationContainer>
         <Card style={styles.cardContainer}>
-          <Stack.Navigator initialRouteName="MusicHome">
+          <Stack.Navigator initialRouteName="LaunchScreen">
             <Stack.Screen name="MusicHome" component={MusicHome} />
             <Stack.Screen name="MusicProfile" component={MusicProfile} />
+            <Stack.Screen name="LaunchScreen" component={LaunchScreen} />
+            <Stack.Screen name="LaunchPremium" component={LaunchPremium} />
+            <Stack.Screen name="SubscriptionPlans"component={SubscriptionPlans}/>
           </Stack.Navigator>
         </Card>
       </NavigationContainer>
