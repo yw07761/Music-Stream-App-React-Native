@@ -1,68 +1,11 @@
-# Music Stream App - React Native
+# Sample Snack app
 
-![Music Stream App]((https://drive.google.com/drive/folders/1-ZK1tv9llQYUxpLvG4hejwioj6vwyB_b))
+Open the `App.js` file to start writing some code. You can preview the changes directly on your phone or tablet by scanning the **QR code** or use the iOS or Android emulators. When you're done, click **Save** and share the link!
 
-## Overview
+When you're ready to see everything that Expo provides (or if you want to use your own editor) you can **Download** your project and use it with [expo cli](https://docs.expo.dev/get-started/installation/#expo-cli)).
 
-Music Stream App is a cross-platform mobile application built with React Native, allowing users to stream their favorite music, create playlists, and discover new tracks. The app integrates with popular music APIs to provide a seamless music experience.
+All projects created in Snack are publicly available, so you can easily share the link to this project via link, or embed it on a web page with the `<>` button.
 
-## Features
+If you're having problems, you can tweet to us [@expo](https://twitter.com/expo) or ask in our [forums](https://forums.expo.dev/c/expo-dev-tools/61) or [Discord](https://chat.expo.dev/).
 
-- 🎶 **Music Streaming**: Play songs from a large catalog of music.
-- 📅 **Playlist Management**: Create, edit, and delete playlists.
-- 🔎 **Search**: Search for songs, artists, and albums.
-- 💬 **Comments & Reviews**: Users can leave comments and reviews on tracks.
-- 🧭 **Recommendations**: Get personalized recommendations based on listening history.
-- 🌐 **Offline Mode**: Download tracks for offline listening.
-
-## Technologies
-
-- **React Native**: The core framework for cross-platform mobile development.
-- **Redux**: State management for the application.
-- **React Navigation**: For smooth navigation between screens.
-- **Axios**: For handling API requests.
-- **AsyncStorage**: Local storage for offline mode.
-- **Node.js**: Backend for serving API requests.
-- **MongoDB**: Database to store user information, playlists, and track metadata.
-
-## Installation
-
-1. **Clone the repository**:
-   ```bash
-   git clone https://github.com/your-username/Music-Stream-App.git
-   cd Music-Stream-App
-
-2. **Install dependencies**:
-    ```bash
-    npm install
-
-3. **Link native dependencies (if needed)**:
-    ```bash
-    npx react-native link
-
-4. **Start the development server**:
-    ```bash
-    npx react-native run-android   # for Android
-    npx react-native run-ios       # for iOS
-
-## Configuration
-
-API Keys: This app requires API keys for the music streaming service. Create a .env file in the root directory and add your API keys:
-
-      API_KEY=your_music_service_api_key
-
-Backend Setup: Set up the backend server by following the instructions in the backend repository.
-
-## Contributing
-
-Contributions are welcome! Follow these steps to contribute:
-
-1. Fork the repository.
-2. Create a new branch (git checkout -b feature/your-feature-name).
-3. Commit your changes (git commit -m 'Add new feature').
-4. Push to the branch (git push origin feature/your-feature-name).
-5. Open a pull request.
-
-## License
-This project is licensed under the MIT License - see the LICENSE file for details.
-
+Snack is Open Source. You can find the code on the [GitHub repo](https://github.com/expo/snack).
