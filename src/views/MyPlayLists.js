@@ -87,7 +87,7 @@ export default MyPlayLists = ({ navigation }) => {
         onRequestClose={() => setModalVisible(false)}
       >
         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: 'rgba(0,0,0,0.5)' }}>
-          <View style={{ width: '80%', backgroundColor: 'white', padding: 20, borderRadius: 10 }}>
+          <View style={{ width: '98%', backgroundColor: 'white', padding: 20, borderRadius: 10 }}>
             <Text style={{ fontSize: 18, fontWeight: 'bold', marginBottom: 10 }}>Add New Song</Text>
             <TextInput
               placeholder="Title"

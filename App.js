@@ -4,7 +4,6 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-// Import các thành phần cần thiết
 import LanchScreen from './src/views/LaunchScreen';
 import LaunchPremium from './src/views/LaunchPremium';
 import MusicHome from './src/views/MusicHome';
@@ -59,15 +58,6 @@ function LibraryStack() {
   );
 }
 
-// Stack cho LaunchPremium
-function LaunchPremiumStack() {
-  return (
-    <Stack.Navigator>
-      <Stack.Screen name="LaunchPremium" component={LaunchPremium} options={{ headerShown: false }} />
-      <Stack.Screen name="SubscriptionPlans" component={SubscriptionPlans} options={{ headerShown: false }} />
-    </Stack.Navigator>
-  );
-}
 
 function MyTabs() {
   return (
@@ -120,6 +110,8 @@ export default function App() {
         <Stack.Screen name="LanchScreen" component={LanchScreen} options={{ headerShown: false }} />
         <Stack.Screen name="HomeTabs" component={MyTabs} options={{ headerShown: false }} />
           <Stack.Screen name="PlayandAudio" component={PlayandAudio} options={{ headerShown: false }} />
+          <Stack.Screen name="LaunchPremium" component={LaunchPremium} options={{ headerShown: false }} />
+            <Stack.Screen name="SubscriptionPlans" component={SubscriptionPlans} options={{ headerShown: false }} />
       </Stack.Navigator>
     </NavigationContainer>
   );

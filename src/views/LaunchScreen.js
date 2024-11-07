@@ -7,58 +7,61 @@ import {
   ImageBackground,
   StyleSheet,
   ScrollView,
-  SafeAreaView
+  Dimensions,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
-const LaunchScreen = ({navigation}) => {
+// Get screen width and height
+const { width, height } = Dimensions.get('window');
 
+const MusicHome = () => {
+  const navigation = useNavigation();
 
-  const handleCreateAccount = () => {
+  const handleNavigateToLaunchPremium = () => {
     navigation.navigate('LaunchPremium');
   };
 
+  const handleAlreadyHaveAccount = () => {
+    navigation.navigate('HomeTabs');
+  };
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <ImageBackground
-        source={require('../images/Rectangle.png')}
+        source={require('../images/Image30.png')}
         style={styles.backgroundImage}
         imageStyle={styles.imageStyle}>
         {/* Ảnh phủ lên trên ảnh nền và làm mờ */}
         <View>
           <Image
             source={require('../images/Rectangle.png')}
+            style={{ width: width, height: height * 0.4 }} 
           />
         </View>
         <View style={styles.logo}>
           <Image
             source={require('../images/Image33.png')}
+            style={{ width: width * 0.5 }} 
           />
         </View>
         <View style={styles.centeredView}>
           <Image
             source={require('../images/YourmusicYourartists.png')}
-            style={styles.image}
+            style={[styles.image, { width: width * 0.8 }]} 
           />
           <TouchableOpacity
-            style={styles.buttonBlack}
-            onPress={()=>{
-                navigation.navigate('LaunchPremium');
-            }}>
+            style={[styles.buttonBlack, { width: width * 0.8 }]}
+            onPress={handleNavigateToLaunchPremium}>
             <Text style={styles.buttonTextWhite}>Create an account</Text>
           </TouchableOpacity>
           <TouchableOpacity
-            style={styles.buttonWhite}
-            onPress={()=>{
-                navigation.navigate('HomeTabs');
-            }}>
+            style={[styles.buttonWhite, { width: width * 0.8 }]} 
+            onPress={handleAlreadyHaveAccount}>
             <Text style={styles.buttonTextBlue}>I already have an account</Text>
           </TouchableOpacity>
         </View>
       </ImageBackground>
     </ScrollView>
-    
   );
 };
 
@@ -74,24 +77,23 @@ const styles = StyleSheet.create({
     resizeMode: 'cover',
   },
   logo: {
-    position: 'absolute', // Đặt View ở vị trí tuyệt đối
-    top: 90, // Đặt View ở phía dưới màn hình
+    position: 'absolute',
+    top: height * 0.1, 
     left: 0,
     right: 0,
-    alignItems: 'center', // Căn giữa theo chiều ngang
-    paddingBottom: 20, // Khoảng cách từ View tới cạnh dưới màn hình
+    alignItems: 'center',
+    paddingBottom: 20,
   },
   centeredView: {
-    position: 'absolute', // Đặt View ở vị trí tuyệt đối
-    top: 400, // Đặt View ở phía dưới màn hình
+    position: 'absolute',
+    top: height * 0.45, 
     left: 0,
     right: 0,
-    alignItems: 'center', // Căn giữa theo chiều ngang
-    paddingBottom: 20, // Khoảng cách từ View tới cạnh dưới màn hình
+    alignItems: 'center',
+    paddingBottom: 20,
   },
   image: {
     marginBottom: 90,
-    width: '100%',
     height: 150,
     resizeMode: 'contain',
   },
@@ -100,17 +102,15 @@ const styles = StyleSheet.create({
     paddingVertical: 15,
     paddingHorizontal: 30,
     borderRadius: 50,
-    marginBottom: 15, 
-    width: '80%', 
-    alignItems: 'center', 
+    marginBottom: 15,
+    alignItems: 'center',
   },
   buttonWhite: {
     backgroundColor: 'white',
     paddingVertical: 15,
     paddingHorizontal: 30,
     borderRadius: 50,
-    width: '80%', 
-    alignItems: 'center', 
+    alignItems: 'center',
   },
   buttonTextWhite: {
     color: 'white',
@@ -118,10 +118,10 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   buttonTextBlue: {
-    color: '#12D7F7', // Màu chữ xanh
+    color: '#12D7F7',
     fontSize: 16,
     textAlign: 'center',
   },
 });
 
-export default LaunchScreen;
+export default MusicHome;

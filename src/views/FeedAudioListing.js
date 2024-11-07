@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, Image, TouchableOpacity, ScrollView, Modal, FlatList, TextInput, Keyboard, SafeAreaView } from 'react-native';
-
+import Icon from 'react-native-vector-icons/FontAwesome';
 const iconlikeden = "https://i.ibb.co/yPwYsGB/iconlikeden.jpg";
 const iconliketrang = "https://i.ibb.co/Y3Hqwmz/iconliketrang.png";
 
@@ -155,10 +155,21 @@ export default function FeedAudioListing() {
             </View>
 
             <View style={{ flexDirection: 'row', padding: 10 }}>
-              <Image source={{ uri: "https://i.ibb.co/m4kktdn/timm.png" }} style={{ width: 20, height: 20, marginRight: 3 }} />
+              <Icon 
+            name="heart-o" 
+            size={20} 
+            color='gray'
+            style={{ marginRight: 3}}
+          />
               <Text style={{ fontSize: 15, color: '#ccc' }}>20</Text>
               <TouchableOpacity onPress={() => { setCommentModalVisible(true); }}>
-                <Image source={{ uri: "https://i.ibb.co/DGTM5dx/cmt.png" }} style={{ width: 20, height: 20, marginLeft: 20, marginRight: 3 }} />
+               <Icon 
+            name="comment" 
+            size={20} 
+            color='gray'
+            style={{marginLeft: 20, marginRight: 3}}
+          />
+                
               </TouchableOpacity>
               <Text style={{ fontSize: 15, color: '#ccc' }}>{item.comments}</Text>
               <Image source={{ uri: "https://i.ibb.co/CK9mgnK/daonguoc.jpg" }} style={{ width: 20, height: 20, marginLeft: 20, marginRight: 3 }} />
@@ -168,50 +179,100 @@ export default function FeedAudioListing() {
           </View>
         ))}
 
-        <Modal
-          visible={isCommentModalVisible}
-          transparent={true}
-          animationType="slide"
-          onRequestClose={() => setCommentModalVisible(false)}
-        >
-          <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: 'rgba(0, 0, 0, 0.5)' }}>
-            <View style={{ width: '95%', backgroundColor: 'black', borderRadius: 10, padding: 20 }}>
-              <Text style={{ color: '#fff', fontSize: 20 }}>Comments</Text>
-              <FlatList
-                data={comments}
-                renderItem={({ item }) => (
-                  <View style={{ marginBottom: 10 }}>
-                    <Text style={{ color: '#fff', fontWeight: 'bold' }}>{item.user}</Text>
-                    <Text style={{ color: '#ccc' }}>{item.text}</Text>
-                    <TouchableOpacity onPress={() => toggleLike(item.id)}>
-                      <Image source={item.liked ? { uri: iconlikeden } : { uri: iconliketrang }} style={{ width: 20, height: 20 }} />
-                    </TouchableOpacity>
-                  </View>
-                )}
-                keyExtractor={item => item.id}
-              />
-              <View style={{ flexDirection: 'row', marginTop: 10 }}>
-                <TextInput
-                  value={newComment}
-                  onChangeText={setNewComment}
-                  placeholder="Write a comment..."
-                  style={{
-                    flex: 1,
-                    height: 40,
-                    borderColor: '#ccc',
-                    borderWidth: 1,
-                    borderRadius: 5,
-                    paddingLeft: 10,
-                    backgroundColor: '#fff'
-                  }}
-                />
-                <TouchableOpacity onPress={addComment}>
-                  <Text style={{ color: '#007AFF', marginLeft: 10 }}>Post</Text>
-                </TouchableOpacity>
-              </View>
+      <Modal
+        visible={isCommentModalVisible}
+        transparent={true}
+        animationType="slide"
+        onRequestClose={() => setCommentModalVisible(false)}
+      >
+        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: 'rgba(0, 0, 0, 0.2)' }}>
+          <View style={{ width: '98%', padding: 20, backgroundColor: 'white', borderRadius: 10, elevation: 5 }}>
+            <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+              <Text style={{ fontSize: 20, fontWeight: 'bold', marginBottom: 10 }}>Comments</Text>
+              <TouchableOpacity onPress={() => setCommentModalVisible(false)}>
+                <Text style={{ color: 'red', fontSize: 20 }}>X</Text>
+              </TouchableOpacity>
             </View>
+            <FlatList
+  data={comments}
+  renderItem={({ item }) => (
+    <View style={{ marginBottom: 20 }}>
+      <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+        <Image source={{ uri: item.avatar }} style={{ width: 40, height: 40, borderRadius: 20 }} />
+        <View style={{ marginLeft: 10, flex: 1 }}>
+          <Text style={{ fontWeight: 'bold' }}>{item.user}</Text>
+          <Text style={{ marginBottom: 5 }}>{item.text}</Text>
+        </View>
+        <TouchableOpacity onPress={() => toggleLike(item.id)} style={{ marginLeft: 'auto' }}>
+          <Icon 
+            name="thumbs-up" 
+            size={20} 
+            color={item.liked ? "#007AFF" : "gray"} 
+          />
+        </TouchableOpacity>
+      </View>
+      
+      {/* Replies Section */}
+      <View style={{ marginLeft: 50, marginTop: 10 }}>
+        {item.replies.map(reply => (
+          <View key={reply.id} style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 5 }}>
+            <Image source={{ uri: reply.avatar }} style={{ width: 25, height: 25, borderRadius: 12.5 }} />
+            <Text style={{ marginLeft: 10, fontWeight: 'bold' }}>{reply.user}:</Text>
+            <Text style={{ marginLeft: 5 }}>{reply.text}</Text>
+            <TouchableOpacity onPress={() => toggleReplyLike(item.id, reply.id)} style={{ marginLeft: 'auto' }}>
+              <Icon 
+                name="thumbs-up" 
+                size={20} 
+                color={reply.liked ? "#007AFF" : "gray"} 
+              />
+            </TouchableOpacity>
           </View>
-        </Modal>
+        ))}
+
+        {/* Reply Input */}
+        <TouchableOpacity onPress={() => setReplyToCommentId(item.id)}>
+          <Text style={{ color: 'blue', marginBottom: 5 }}>Reply</Text>
+        </TouchableOpacity>
+        {replyToCommentId === item.id && (
+          <TextInput
+            style={{
+              borderWidth: 1,
+              borderColor: '#ccc',
+              borderRadius: 5,
+              padding: 5,
+              marginTop: 5,
+            }}
+            placeholder="Reply..."
+            value={replyText}
+            onChangeText={setReplyText}
+            onSubmitEditing={() => {
+              addReply(item.id);
+            }}
+          />
+        )}
+      </View>
+    </View>
+  )}
+  keyExtractor={(item) => item.id}
+/>
+
+            <TextInput
+              style={{
+                borderWidth: 1,
+                borderColor: '#ccc',
+                borderRadius: 5,
+                padding: 5,
+                marginTop: 10,
+              }}
+              placeholder="Add a comment..."
+              value={newComment}
+              onChangeText={setNewComment}
+              onSubmitEditing={addComment}
+            />
+          </View>
+        </View>
+      </Modal>
+
       </ScrollView>
     </SafeAreaView>
   );

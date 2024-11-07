@@ -222,7 +222,7 @@ const Section = ({ title, children }) => (
 
 const styles = StyleSheet.create({
   scrollContainer: {
-    flexGrow: 1,
+    flexGrow: 1,padding:10
   },
   profileHeader: {
     alignItems: 'center',

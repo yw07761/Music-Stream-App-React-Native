@@ -7,14 +7,16 @@ import {
   ImageBackground,
   StyleSheet,
   ScrollView,
-  SafeAreaView
+  Dimensions
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
-const MusicHome = ({navigation}) => {
 
+const { width, height } = Dimensions.get('window');
+
+const LaunchPremium = ({navigation}) => {
   return (
-     <ScrollView contentContainerStyle={styles.container}>
+    <ScrollView contentContainerStyle={styles.container}>
       <ImageBackground
         source={require('../images/image112.png')}
         style={styles.backgroundImage}
@@ -22,36 +24,33 @@ const MusicHome = ({navigation}) => {
         <View>
           <Image
             source={require('../images/Rectangle.png')}
+            style={{ width: width, height: height * 0.4 }} 
           />
         </View>
         <View style={styles.logo}>
           <Image
             source={require('../images/image113.png')}
+            style={{ width: width * 0.5 }} 
           />
         </View>
         <View style={styles.centeredView}>
           <Image
             source={require('../images/welcomtopremium.png')}
-            style={styles.image}
+            style={[styles.image, { width: width * 0.8 }]} 
           />
-          <Text
-            style={{
-              fontSize: 50,
-              color: '#fff',
-            }}>
+          <Text style={styles.text}>
             ...
           </Text>
           <TouchableOpacity
-            style={styles.buttonBlack}
-             onPress={()=>{
-                navigation.navigate('SubscriptionPlans');
+            style={[styles.buttonBlack, { width: width * 0.8 }]} 
+            onPress={() => {
+              navigation.navigate('SubscriptionPlans');
             }}>
             <Text style={styles.buttonTextWhite}>Start listening</Text>
           </TouchableOpacity>
         </View>
       </ImageBackground>
     </ScrollView>
-   
   );
 };
 
@@ -68,25 +67,23 @@ const styles = StyleSheet.create({
     resizeMode: 'cover',
   },
   logo: {
-    position: 'absolute', // Đặt View ở vị trí tuyệt đối
-    top: 90, // Đặt View ở phía dưới màn hình
+    position: 'absolute',
+    top: height * 0.1, 
     left: 0,
     right: 0,
-    alignItems: 'center', // Căn giữa theo chiều ngang
-    paddingBottom: 20, // Khoảng cách từ View tới cạnh dưới màn hình
+    alignItems: 'center',
+    paddingBottom: 20,
   },
   centeredView: {
-    position: 'absolute', // Đặt View ở vị trí tuyệt đối
-    top: 420, // Đặt View ở phía dưới màn hình
+    position: 'absolute', 
+    top: height * 0.45, 
     left: 0,
     right: 0,
-    alignItems: 'center', // Căn giữa theo chiều ngang
+    alignItems: 'center', 
   },
   image: {
     marginVertical: 120,
     marginBottom: -30,
-    width: '80%',
-    height: 100,
     resizeMode: 'contain',
   },
   buttonBlack: {
@@ -96,7 +93,6 @@ const styles = StyleSheet.create({
     borderRadius: 50,
     marginBottom: 15,
     marginTop: 30,
-    width: '80%',
     alignItems: 'center',
   },
   buttonTextWhite: {
@@ -104,7 +100,10 @@ const styles = StyleSheet.create({
     fontSize: 16,
     textAlign: 'center',
   },
-  
+  text: {
+    fontSize: 50,
+    color: '#fff',
+  },
 });
 
-export default MusicHome;
+export default LaunchPremium;

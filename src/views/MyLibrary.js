@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View, TouchableOpacity, Image, Text, ScrollView, TextInput,FlatList,SafeAreaView} from 'react-native';
-
+import Icon from 'react-native-vector-icons/FontAwesome';
 const tabs = ["Playlists", "New tag", "Songs", "Albums", "Artists"];
 
 const initialSongs = [
@@ -78,32 +78,14 @@ const Tab = ({ name, isSelected, onSelect }) => {
   );
 };
 
-const SongItem = ({ song, onToggleLike }) => {
-  return (
-    <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 16 }}>
-      <Image 
-        source={{ uri: song.cover }} 
-        style={{ width: 50, height: 50, borderRadius: 8, marginRight: 12 }} 
-      />
-      <View>
-        <Text style={{ fontSize: 16, fontWeight: 'bold' }}>{song.title}</Text>
-        <Text style={{ color: '#777' }}>{song.artist}</Text>
-        <Text style={{ color: '#777' }}>{song.plays} • {song.duration}</Text>
-      </View>
-      <TouchableOpacity onPress={() => onToggleLike(song.id)} style={{ marginLeft: 'auto' }}>
-        <Text style={{ fontSize: 18 }}>{song.liked ? "💙" : "♡"}</Text>
-      </TouchableOpacity>
-    </View>
-  );
-};
+
 
 export default MyLibrary = ({ navigation }) => { 
   const [selectedTab, setSelectedTab] = useState('Playlists');
   const [songs, setSongs] = useState(initialSongs);
-  const [isFollowed, setIsFollowed] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
   const [isSearching, setIsSearching] = useState(false);
-
+   const [isFollowed, setIsFollowed] = useState(false);
   const toggleLike = (id) => {
     setSongs((prevSongs) =>
       prevSongs.map((song) =>
@@ -112,8 +94,10 @@ export default MyLibrary = ({ navigation }) => {
     );
   };
 
+
+
   const toggleFollow = () => {
-    setIsFollowed((prevFollowed) => !prevFollowed);
+    setIsFollowed(!isFollowed);
   };
 
   const handleTabSelect = (tab) => {
@@ -143,6 +127,24 @@ export default MyLibrary = ({ navigation }) => {
     song.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
     song.artist.toLowerCase().includes(searchTerm.toLowerCase())
   );
+const SongItem = ({ song, onToggleLike }) => {
+  return (
+    <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 16 }}>
+      <Image 
+        source={{ uri: song.cover }} 
+        style={{ width: 50, height: 50, borderRadius: 8, marginRight: 12 }} 
+      />
+      <View>
+        <Text style={{ fontSize: 16, fontWeight: 'bold' }}>{song.title}</Text>
+        <Text style={{ color: '#777' }}>{song.artist}</Text>
+        <Text style={{ color: '#777' }}>{song.plays} • {song.duration}</Text>
+      </View>
+      <TouchableOpacity onPress={() => onToggleLike(song.id)} style={{ marginLeft: 'auto' }}>
+        <Icon name={song.liked ? "heart" : "heart-o"} size={24} color={song.liked ? "#FF1493" : "gray"} />
+      </TouchableOpacity>
+    </View>
+  );
+};
 
   return (
     <SafeAreaView>
@@ -152,7 +154,7 @@ export default MyLibrary = ({ navigation }) => {
         <TouchableOpacity onPress={toggleSearch}>
           <Image  
             source={{ uri: "https://i.ibb.co/D4jBvWx/iconsearch.jpg" }}
-            style={{ width: 30, height: 30,marginLeft:190}}
+            style={{ width: 30, height: 30,marginLeft:230}}
           />
         </TouchableOpacity>
       </View>
